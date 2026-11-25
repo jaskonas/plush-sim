@@ -1,0 +1,11 @@
+{
+  "name": "Plush Studio",
+  "short_name": "Plush",
+  "description": "Design a stuffed animal and see how it would do in the real world.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fbf4ee",
+  "theme_color": "#d65f8a",
+  "icons": [{ "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

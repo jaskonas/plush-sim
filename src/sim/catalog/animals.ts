@@ -50,7 +50,7 @@ export const ANIMALS: Record<AnimalId, Animal> = {
   dinosaur: {
     id: 'dinosaur', label: 'Dinosaur', emoji: '🦕', kidNote: 'Spikes down the back. Kids go wild for dinos.',
     basePieces: 16, surface: 0.26, fans: { kids: 0.15, tweens: 0.05 },
-    shape: { ears: { kind: 'none', size: 0 }, snout: 0.3, tail: 'spiky', extras: ['spikes'] },
+    shape: { ears: { kind: 'none', size: 0 }, snout: 0.55, tail: 'spiky', extras: ['spikes'] },
   },
   unicorn: {
     id: 'unicorn', label: 'Unicorn', emoji: '🦄', kidNote: 'A horn and a mane — magic, but more pieces to sew.',

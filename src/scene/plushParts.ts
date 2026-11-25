@@ -138,13 +138,15 @@ export function plushParts(d: Input): Part[] {
   if (shape.extras.includes('spikes')) {
     // A ridge of spikes from the top of the head down the back, so it reads from the front too.
     const ridge: Array<[number, number, number]> = [
-      [headY + r * 0.95, r * 0.1, 0.2],
-      [headY + r * 0.55, -r * 0.65, -0.5],
-      [bodyY * 1.75, back * 0.75, -0.9],
-      [bodyY * 1.25, back * 1.02, -1.3],
+      [headY + r * 1.0, r * 0.15, 0.1],
+      [headY + r * 0.85, -r * 0.45, -0.4],
+      [headY + r * 0.35, -r * 0.9, -0.9],
+      [bodyY * 1.8, back * 0.8, -1.0],
+      [bodyY * 1.4, back * 1.0, -1.3],
+      [bodyY * 0.9, back * 1.08, -1.5],
     ];
     ridge.forEach(([y, z, tilt], i) => {
-      out.push({ id: `spike-${i}`, shape: 'cone', position: [0, y, z], scale: [0.075, 0.17, 0.05], rotation: [tilt, 0, 0], role: 'dark' });
+      out.push({ id: `spike-${i}`, shape: 'cone', position: [0, y, z], scale: [0.085, 0.2, 0.05], rotation: [tilt, 0, 0], role: 'dark' });
     });
   }
   if (shape.extras.includes('bellyPatch')) {

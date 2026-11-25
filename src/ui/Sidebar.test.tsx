@@ -75,3 +75,11 @@ it('Launch with a safe toy goes to sewing', async () => {
   await userEvent.click(screen.getByRole('button', { name: /launch/i }));
   expect(useGame.getState().screen).toBe('sewing');
 });
+
+it('warns before launch when every toy would lose money', async () => {
+  render(<App />);
+  expect(screen.queryByText(/lose money on every toy/i)).toBeNull();
+  await userEvent.click(screen.getByRole('button', { name: /large/i }));
+  await userEvent.click(screen.getByRole('button', { name: /faux fur/i }));
+  expect(screen.getByText(/lose money on every toy/i)).toBeInTheDocument();
+});

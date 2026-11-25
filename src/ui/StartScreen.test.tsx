@@ -9,7 +9,7 @@ vi.mock('../scene/Plush', () => ({ Plush: () => null }));
 
 beforeEach(() => {
   useGame.setState(useGame.getInitialState(), true);
-  useGame.getState().newToy(() => 0);
+  useGame.setState({ trend: TRENDS[0] });
 });
 
 it("shows this year's trend and the four shopper groups", () => {

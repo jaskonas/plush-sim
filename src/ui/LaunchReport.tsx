@@ -33,8 +33,19 @@ export function LaunchReport({ report }: { report: Report }) {
           </strong>
         </div>
       </div>
-      <p className="sums">
-        {report.units.toLocaleString('en-US')} sold × {formatMoney(report.profitPerToy)} each, minus {formatMoney(report.setupCost)} to set up the factory
+      <p className="sums" data-testid="sums">
+        {report.profitPerToy >= 0 ? (
+          <>
+            {report.units.toLocaleString('en-US')} sold × {formatMoney(report.profitPerToy)} each, minus {formatMoney(report.setupCost)} to set up the
+            factory
+          </>
+        ) : (
+          <>
+            Each toy cost {formatMoney(report.cost)} to make, but you only got {formatMoney(report.price / 2)} — so you lost{' '}
+            {formatMoney(-report.profitPerToy)} on every one of the {report.units.toLocaleString('en-US')} sold, plus {formatMoney(report.setupCost)} to
+            set up the factory.
+          </>
+        )}
       </p>
       <p className="sums">
         Makes for {formatMoney(report.cost)} · Sells for ${report.price} · Shop keeps half

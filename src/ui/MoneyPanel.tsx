@@ -21,6 +21,7 @@ export function MoneyPanel({ design }: { design: Design }) {
         <span className="money-label">💰 Profit each</span>
         <strong data-testid="profit-each">{formatMoney(profit)}</strong>
       </div>
+      {profit < 0 && <p className="money-warning">⚠️ You'd lose money on every toy! Raise the price or make it cheaper.</p>}
     </section>
   );
 }

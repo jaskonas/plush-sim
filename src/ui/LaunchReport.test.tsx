@@ -90,3 +90,13 @@ it('the shelf is hidden before anything is launched', () => {
   render(<App />);
   expect(screen.queryByTestId('shelf')).toBeNull();
 });
+
+it('when every toy loses money, the report says so in plain words (no negative sums)', () => {
+  launchWith({ animal: 'elephant', style: 'realistic', fabric: 'fauxFur', stuffing: 'pellets', eyes: 'buttons', size: 'large', accessory: 'scarf', audience: 'collectors', price: 40 });
+  render(<App />);
+  expect(useGame.getState().report!.profitPerToy).toBeLessThan(0);
+  const sums = screen.getByTestId('sums').textContent!;
+  expect(sums).toMatch(/cost \$[\d.]+ to make, but you only got \$20/i);
+  expect(sums).toMatch(/lost \$[\d.]+ on every one/i);
+  expect(sums).not.toMatch(/×\s*−/);
+});

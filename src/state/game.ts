@@ -24,7 +24,11 @@ interface GameState {
   tryAgain: () => void;
 }
 
-const pickTrend = (rand: () => number) => TRENDS[Math.min(TRENDS.length - 1, Math.floor(rand() * TRENDS.length))];
+/** A season other than the current one, so New toy always feels new. */
+const pickTrend = (rand: () => number, current: Trend) => {
+  const others = TRENDS.filter((t) => t !== current);
+  return others[Math.min(others.length - 1, Math.floor(rand() * others.length))];
+};
 
 export const useGame = create<GameState>()((set, get) => ({
   screen: 'start',
@@ -33,7 +37,7 @@ export const useGame = create<GameState>()((set, get) => ({
   report: null,
   shelf: [],
 
-  newToy: (rand = Math.random) => set({ screen: 'start', trend: pickTrend(rand), design: DEFAULT_DESIGN, report: null }),
+  newToy: (rand = Math.random) => set({ screen: 'start', trend: pickTrend(rand, get().trend), design: DEFAULT_DESIGN, report: null }),
 
   startDesigning: () => set({ screen: 'design' }),
 

@@ -58,7 +58,7 @@ it('new toy picks a trend, resets the design, and keeps the shelf', () => {
   s().launch();
   s().newToy(() => 0);
   expect(s().screen).toBe('start');
-  expect(s().trend).toEqual(TRENDS[0]);
+  expect(s().trend).toEqual(TRENDS[1]); // never the season we just had (TRENDS[0])
   expect(s().design).toEqual(DEFAULT_DESIGN);
   expect(s().shelf).toHaveLength(1);
   s().newToy(() => 0.999);
@@ -77,4 +77,12 @@ it('keeps prices to whole dollars between $5 and $40', () => {
 it('caps names at 30 characters', () => {
   s().setDesign({ name: 'x'.repeat(50) });
   expect(s().design.name).toHaveLength(30);
+});
+
+it('New toy always brings a different season', () => {
+  for (const r of [0, 0.3, 0.6, 0.99]) {
+    const before = s().trend;
+    s().newToy(() => r);
+    expect(s().trend).not.toEqual(before);
+  }
 });

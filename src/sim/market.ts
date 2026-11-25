@@ -2,7 +2,7 @@ import { ANIMALS } from './catalog/animals';
 import { STYLES } from './catalog/styles';
 import { ACCESSORIES, COLOURS, EYES, FABRICS, SIZES, STUFFINGS } from './catalog/materials';
 import { GROUPS } from './catalog/groups';
-import { GROUP_IDS, type AudienceId, type Fans, type GroupId } from './catalog/ids';
+import { GROUP_IDS, type AudienceId, type Fans, type GroupId, type SizeId } from './catalog/ids';
 import { BASE_APPEAL, SETUP_COST, TREND_BONUS } from './catalog/coefficients';
 import { costToMake, profitPerToy } from './cost';
 import { safetyCheck } from './safety';
@@ -91,10 +91,11 @@ export function appealFor(g: GroupId, d: Design, t: Trend): number {
   return clamp(BASE_APPEAL + sum, 0, 1);
 }
 
-/** 1 at or below the group's comfy price, falling away above it. */
-export function priceFactor(g: GroupId, price: number): number {
-  const { comfyPrice, sensitivity } = GROUPS[g];
-  return price <= comfyPrice ? 1 : Math.exp((-sensitivity * (price - comfyPrice)) / comfyPrice);
+/** 1 at or below the group's comfy price for a toy this size, falling away above it. */
+export function priceFactor(g: GroupId, price: number, size: SizeId = 'medium'): number {
+  const { sensitivity } = GROUPS[g];
+  const comfy = GROUPS[g].comfyPrice * SIZES[size].priceExpect;
+  return price <= comfy ? 1 : Math.exp((-sensitivity * (price - comfy)) / comfy);
 }
 
 function faceFor(appeal: number): Exclude<Face, '—'> {
@@ -120,7 +121,7 @@ export function launch(d: Design, t: Trend): LaunchReport {
   const groups: GroupResult[] = GROUP_IDS.map((g) => {
     const reach = REACH[d.audience][g] ?? 0;
     const appeal = appealFor(g, d, t);
-    const pf = priceFactor(g, d.price);
+    const pf = priceFactor(g, d.price, d.size);
     if (reach === 0) return { group: g, reach, appeal, priceFactor: pf, units: 0, face: '—', line: 'Not aimed at us' };
     const units = Math.round((GROUPS[g].size * appeal * reach * pf) / 100) * 100;
     // A loved toy that's priced out of reach looks less happy on the report.

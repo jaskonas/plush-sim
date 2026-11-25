@@ -1,4 +1,4 @@
-import { launch, REACH, type GroupResult, type LaunchReport } from './market';
+import { launch, priceFactor, REACH, type GroupResult, type LaunchReport } from './market';
 import { profitPerToy } from './cost';
 import { DEFAULT_DESIGN, type Design } from './design';
 import { TRENDS } from './catalog/trends';
@@ -35,6 +35,11 @@ it('the collectors aisle does not reach toddler parents', () => {
 
 it('raising the price never raises sales', () => {
   expect(launch(d({ price: 30 }), t).units).toBeLessThanOrEqual(launch(d({ price: 10 }), t).units);
+});
+
+it('shoppers will pay more for a big toy than a small one', () => {
+  expect(priceFactor('kids', 18, 'large')).toBeGreaterThan(priceFactor('kids', 18, 'medium'));
+  expect(priceFactor('kids', 18, 'medium')).toBeGreaterThan(priceFactor('kids', 18, 'small'));
 });
 
 it('stars do not depend on price', () => {

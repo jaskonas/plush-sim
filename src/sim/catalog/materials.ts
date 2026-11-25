@@ -19,27 +19,27 @@ export const FABRICS: Record<FabricId, Fabric> = {
   minky: {
     id: 'minky', label: 'Minky', emoji: '☁️', kidNote: 'Super soft and silky. Costs more.',
     costPerM2: 9, softness: 0.95, durability: 0.6, sheds: false, washable: true,
-    fans: { toddlerParents: 0.05, tweens: 0.1 }, look: { roughness: 0.6, sheen: 0.9, fuzz: 0.3 },
+    fans: { toddlerParents: 0.05, tweens: 0.1, collectors: 0.05 }, look: { roughness: 0.6, sheen: 0.9, fuzz: 0.3 },
   },
   fleece: {
     id: 'fleece', label: 'Fleece', emoji: '🧣', kidNote: 'Soft, cheap and easy to wash.',
     costPerM2: 5, softness: 0.75, durability: 0.7, sheds: false, washable: true,
-    fans: {}, look: { roughness: 0.9, sheen: 0.4, fuzz: 0.2 },
+    fans: { collectors: -0.05 }, look: { roughness: 0.9, sheen: 0.4, fuzz: 0.2 },
   },
   cotton: {
     id: 'cotton', label: 'Cotton', emoji: '🌱', kidNote: 'Tough and washable, but not very cuddly.',
     costPerM2: 4, softness: 0.45, durability: 0.85, sheds: false, washable: true,
-    fans: { toddlerParents: 0.05 }, look: { roughness: 1, sheen: 0, fuzz: 0 },
+    fans: { toddlerParents: 0.05, collectors: -0.05 }, look: { roughness: 1, sheen: 0, fuzz: 0 },
   },
   felt: {
     id: 'felt', label: 'Felt', emoji: '✂️', kidNote: 'Cheapest. Stiff, and it pills and tears.',
     costPerM2: 3, softness: 0.3, durability: 0.4, sheds: false, washable: false,
-    fans: { collectors: -0.1 }, look: { roughness: 1, sheen: 0.1, fuzz: 0.05 },
+    fans: { collectors: -0.15 }, look: { roughness: 1, sheen: 0.1, fuzz: 0.05 },
   },
   fauxFur: {
     id: 'fauxFur', label: 'Faux fur', emoji: '🦁', kidNote: 'Fluffy and fancy. Pricey, and it sheds a little.',
     costPerM2: 14, softness: 0.9, durability: 0.55, sheds: true, washable: false,
-    fans: { toddlerParents: -0.1, tweens: 0.1, collectors: 0.1 }, look: { roughness: 0.7, sheen: 1, fuzz: 0.9 },
+    fans: { toddlerParents: -0.1, tweens: 0.1, collectors: 0.15 }, look: { roughness: 0.7, sheen: 1, fuzz: 0.9 },
   },
 };
 
@@ -85,13 +85,15 @@ export const EYES: Record<EyesId, Eyes> = {
 
 export interface Size extends Entry<SizeId> {
   cm: number;
+  /** Shoppers expect to pay this much × their usual price for a toy this size. */
+  priceExpect: number;
   fans: Fans;
 }
 
 export const SIZES: Record<SizeId, Size> = {
-  small: { id: 'small', label: 'Small', emoji: '🤏', kidNote: '20 cm. Fits in a backpack.', cm: 20, fans: { kids: -0.05, tweens: 0.1, collectors: 0.1 } },
-  medium: { id: 'medium', label: 'Medium', emoji: '🧸', kidNote: '35 cm. A good size to hug.', cm: 35, fans: {} },
-  large: { id: 'large', label: 'Large', emoji: '🦣', kidNote: '60 cm. Huge hugs — and lots of fabric.', cm: 60, fans: { kids: 0.15, tweens: -0.05, collectors: -0.1 } },
+  small: { id: 'small', label: 'Small', emoji: '🤏', kidNote: '20 cm. Fits in a backpack.', cm: 20, priceExpect: 0.7, fans: { kids: -0.05, tweens: 0.1, collectors: 0.1 } },
+  medium: { id: 'medium', label: 'Medium', emoji: '🧸', kidNote: '35 cm. A good size to hug.', cm: 35, priceExpect: 1, fans: {} },
+  large: { id: 'large', label: 'Large', emoji: '🦣', kidNote: '60 cm. Huge hugs — and lots of fabric.', cm: 60, priceExpect: 2.2, fans: { kids: 0.15, tweens: -0.05, collectors: -0.1 } },
 };
 
 export type Palette = 'natural' | 'pastel' | 'bright';

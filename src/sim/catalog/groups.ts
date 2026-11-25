@@ -20,7 +20,7 @@ export interface Group extends Entry<GroupId> {
 export const GROUPS: Record<GroupId, Group> = {
   toddlerParents: {
     id: 'toddlerParents', label: 'Toddler parents', emoji: '👶', kidNote: 'Want it safe, soft and washable.',
-    size: 30000, comfyPrice: 14, sensitivity: 1.2, softnessWeight: 0.3, durabilityWeight: 0.2, trendWeight: 0.5,
+    size: 40000, comfyPrice: 16, sensitivity: 1.2, softnessWeight: 0.3, durabilityWeight: 0.2, trendWeight: 0.5,
     palettes: { natural: 0.05, pastel: 0.1, bright: 0 },
   },
   kids: {
@@ -30,12 +30,12 @@ export const GROUPS: Record<GroupId, Group> = {
   },
   tweens: {
     id: 'tweens', label: 'Tweens', emoji: '🧑', kidNote: 'Want what is trendy: pastel, squishy, small.',
-    size: 20000, comfyPrice: 16, sensitivity: 1.2, softnessWeight: 0.2, durabilityWeight: 0, trendWeight: 1.5,
+    size: 20000, comfyPrice: 16, sensitivity: 1.6, softnessWeight: 0.2, durabilityWeight: 0, trendWeight: 1.5,
     palettes: { natural: -0.05, pastel: 0.1, bright: 0 },
   },
   collectors: {
     id: 'collectors', label: 'Collectors', emoji: '🏆', kidNote: 'Grown-ups who pay a lot for quality.',
-    size: 6000, comfyPrice: 35, sensitivity: 0.3, softnessWeight: 0.05, durabilityWeight: 0.3, trendWeight: 0.3,
+    size: 10000, comfyPrice: 35, sensitivity: 0.3, softnessWeight: 0.1, durabilityWeight: 0.15, trendWeight: 0.3,
     palettes: { natural: 0.15, pastel: -0.05, bright: -0.1 },
   },
 };

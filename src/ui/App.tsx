@@ -1,6 +1,7 @@
 import { useGame } from '../state/game';
 import { StartScreen } from './StartScreen';
 import { Sidebar } from './Sidebar';
+import { SewingScreen } from './SewingScreen';
 import { Stage } from '../scene/Stage';
 import { Plush } from '../scene/Plush';
 
@@ -25,6 +26,7 @@ export function App() {
           <Sidebar />
         </main>
       )}
+      {screen === 'sewing' && <SewingScreen />}
     </div>
   );
 }

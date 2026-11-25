@@ -78,3 +78,10 @@ button:disabled { cursor: not-allowed; }
 .safety.ok { background: #e6f5ec; color: #23613f; }
 .safety.fail { background: #fdeae7; color: #8a2f27; }
 .safety ul { margin: 4px 0 0; padding-left: 20px; }
+
+/* Sewing */
+.sewing { flex: 1; display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: 0; }
+.sewing-bar { display: flex; align-items: center; gap: 16px; padding: 14px 24px; background: var(--card); border-top: 1px solid var(--line); }
+.sewing-caption { margin: 0; font-size: 20px; font-weight: 700; min-width: 280px; }
+.sewing-bar progress { flex: 1; height: 12px; accent-color: var(--pink); }
+.skip { border: 2px solid var(--line); background: #fff; border-radius: 999px; padding: 8px 16px; }
